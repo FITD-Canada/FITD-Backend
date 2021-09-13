@@ -5,17 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "babel-watch fitd-tech-server/server.js",
-    "build": "babel fitd-tech-server --out-dir build "
+    "dev": "babel-watch fitd-server/server.js",
+    "build": "babel fitd-server --out-dir build "
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aidenkimgj/fitd-tech-server.git"
+    "url": "git+https://github.com/FITD-Canada/FITD-Backend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/aidenkimgj/fitd-tech-server/issues"
+    "url": "https://github.com/FITD-Canada/FITD-Backend/issues"
   },
   "dependencies": {
     "aws-sdk": "^2.922.0",
