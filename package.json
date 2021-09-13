@@ -1,12 +1,12 @@
 {
-  "name": "fitd-tech-server",
+  "name": "fitd-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "babel-watch fitd-server/server.js",
-    "build": "babel fitd-server --out-dir build "
+    "dev": "babel-watch server/server.js",
+    "build": "babel server --out-dir build "
   },
   "repository": {
     "type": "git",
