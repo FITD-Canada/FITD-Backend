@@ -29,7 +29,7 @@ router.get('/auth', auth, (req, res) => {
       .status(200)
       .json({
         _id: req.user._id,
-        isAdmin: req.user.role === 2 ? false : true,
+        isAdmin: req.user.role === 2 ? true : false,
         isAuth: true,
         email: req.user.email,
         firstName: req.user.firstName,
@@ -208,6 +208,7 @@ router.post('/resetpw', auth, async (req, res) => {
 //Receive: UserID, Return - updated user info
 router.post('/approve-coach', auth, async (req, res) => {
   //Admin authenticate
+
   if (req.user.role !== 2)
     res.status(400).json({ error: true, message: 'Unauthorized' });
   let _id = req.body._id;
@@ -263,6 +264,7 @@ router.get('/s3Url/:filename', async (req, res) => {
 router.post('/request-coach', auth, async (req, res) => {
   //Check you are user
   let user = req.user;
+
   if (user.role !== 0)
     return res
       .status(400)
@@ -396,18 +398,21 @@ router.get('/coachlist', async (req, res) => {
   });
 });
 
-router.delete('/deleteuser/:id', auth, async (req, res) => {
+router.put('/delete-user', auth, async (req, res) => {
   //Admin authenticate
   let user = req.user;
   if (user.role !== 2)
     res.status(400).json({ error: true, message: 'Unauthorized' });
 
-  const _id = req.params.id;
-  User.findOneAndDelete({ _id: _id }, (err, doc) => {
+  const _id = req.body._id;
+  console.log(`userid`, _id);
+  User.findOneAndDelete({ _id: _id }, async (err, doc) => {
     if (err) return res.status(400).json({ success: false, err });
     if (doc) {
+      const users = await User.find().lean();
       return res.status(200).json({
         success: true,
+        users,
       });
     } else {
       return res.status(400).json({
