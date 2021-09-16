@@ -77,8 +77,8 @@ router.post('/login', (req, res) => {
       //Generate Token
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
-        res.cookie('w_authExp', user.tokenExp);
-        res.cookie('w_auth', user.token).status(200).json({
+        res.cookie('w_authExp', user.tokenExp, { sameSite: 'none', secure: true });
+        res.cookie('w_auth', user.token, { sameSite: 'none', secure: true }).status(200).json({
           loginSuccess: true,
           userId: user._id,
         });
@@ -135,8 +135,8 @@ router.post('/google', async (req, res) => {
         if (err) return res.json({ success: false, err });
         newUser.generateToken((err, user) => {
           if (err) return res.status(400).send(err);
-          res.cookie('w_authExp', user.tokenExp);
-          res.cookie('w_auth', user.token).status(200).json({
+          res.cookie('w_authExp', user.tokenExp, { sameSite: 'none', secure: true });
+          res.cookie('w_auth', user.token, { sameSite: 'none', secure: true }).status(200).json({
             loginSuccess: true,
             userId: user._id,
           });
@@ -151,8 +151,8 @@ router.post('/google', async (req, res) => {
 
         user.generateToken((err, user) => {
           if (err) return res.status(400).send(err);
-          res.cookie('w_authExp', user.tokenExp);
-          res.cookie('w_auth', user.token).status(200).json({
+          res.cookie('w_authExp', user.tokenExp, { sameSite: 'none', secure: true });
+          res.cookie('w_auth', user.token, { sameSite: 'none', secure: true }).status(200).json({
             loginSuccess: true,
             userId: user._id,
           });
